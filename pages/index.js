@@ -12,6 +12,16 @@ export default function Home({contacts_list}) {
       <Layout>
         <Head>
           <title>Wumi's Contact Manager</title>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
+
+
         </Head>
         <Header />
         <Container>
