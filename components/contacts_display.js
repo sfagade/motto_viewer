@@ -1,10 +1,31 @@
+
 import { useState, useEffect } from 'react'
+import { DataGrid } from '@mui/x-data-grid';
 import Link from 'next/link'
 
 export default function ContactsDisplay({ contacts }) {
 
   const [data, setData] = useState(null)
   const [isLoading, setLoading] = useState(false)
+
+  const columns = [
+    { field: 'record_id', headerName: 'ID', width: 130 },
+    { field: 'make', headerName: 'Make', width: 130 },
+    { field: 'model', headerName: 'Model', width: 130 },
+    { field: 'price', headerName: 'Price', width: 90 },
+    {
+      field: 'views',
+      headerName: 'Views',
+      type: 'number',
+      width: 90,
+    },
+    {
+      field: 'created_at',
+      headerName: 'Created',
+      type: 'date',
+      width: 140,
+    }
+  ];
 
   useEffect(() => {
     setLoading(true)
@@ -22,25 +43,15 @@ export default function ContactsDisplay({ contacts }) {
 
     return (
       <>
-        <ul className="list-group mt-2" id="contacts_ul">
-            {data[0].map(contact => {
-                return (
-                    <li key={contact.record_id}
-                        className="mb-6 mt-3 border border-solid ">
-                        <div className="p-10 border-2 border-solid">
-                                <div className="p-10">{contact.make} {contact.model}</div>
-                                <div className="p-10">{contact.price}</div>
-                                <div className="p-10">{contact.year}</div>
-                                <div className="p-10">{contact.views}</div>
-                                <div className="p-10">{contact.created_at['$date']}</div>
-                                <div className="p-10">Update | Delete</div>
-                            </div>
-
-                    </li>
-                    )
-                })
-            }
-        </ul>
+        <div style={{ height: 700, width: '100%' }}>
+          <DataGrid
+            getRowId={(row) => row.record_id}
+            rows={data[0]}
+            columns={columns}
+            pageSize={15}
+            rowsPerPageOptions={[10]}
+          />
+        </div>
       </>
     )
-  }
+}

@@ -1,6 +1,4 @@
 
-import "../styles/output.css";
-
 function OlaApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
